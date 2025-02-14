@@ -43,22 +43,31 @@
                 padding: 15px 30px;
             }
 
-            input:focus{
+            input:focus {
                 border: 3px solid rgb(30, 255, 0);
             }
-            select:focus{
-                border: 3px solid rgb(30, 255, 0);;
+
+            select:focus {
+                border: 3px solid rgb(30, 255, 0);
+                ;
             }
 
-            button{
+            button {
                 background-color: black;
                 border: none;
                 color: white;
                 letter-spacing: 5px;
             }
-            button:hover{
+
+            button:hover {
                 background-color: green;
                 transition: .15s ease-in-out;
+            }
+        }
+
+        @media all and (max-width: 576px) {
+            .form{
+               width: 80%;
             }
         }
     </style>
@@ -70,7 +79,9 @@
             <h1 style="text-align: center;color: white;">LOGIN PAGE</h1>
             <input type="text" name="username" placeholder="enter username" required>
             <input type="password" name="password" placeholder="enter password" required>
-            <p style="color: red;"><%=msg%></p>
+            <p style="color: red;">
+                <%=msg%>
+            </p>
             <button>LOGIN</button>
         </form>
     </div>
