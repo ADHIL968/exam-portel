@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIEW QUESTIONS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            scrollbar-width: none;
+            box-sizing: border-box;
+            outline: none;
+            font-family: Poppins;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .navbar{
+            width: 100%;
+            height: 60px;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+
+            a{
+                padding: 10px 30px;
+                text-decoration: none;
+                color: black;
+                font-weight: 700;
+            }
+
+            a:hover{
+                background-color: rebeccapurple;
+                transition: .15s ease-in-out;
+                color: white;
+            }
+        }
+
+        .question{
+            width: 100%;
+            height: calc(100% - 60px);
+        }
+        table{
+            width: 100%;
+            height: max-content;
+        }
+        tr{
+            width: 100%;
+        }
+        .number{
+            width: 10%;
+            text-align: center;
+            padding: 15px 0;
+            background-color: dodgerblue;
+            color: white;
+        }
+        .que{
+            width: 90%;
+            padding: 15px 20px;
+            text-wrap: wrap;
+            background-color: lightgreen;
+        }
+        /* HTML: <div class="loader"></div> */
+        .loader {
+            width: 100px;
+            aspect-ratio: 1;
+            display: grid;
+            animation: l14 4s infinite;
+        }
+
+        .loader::before,
+        .loader::after {
+            content: "";
+            grid-area: 1/1;
+            border: 8px solid;
+            border-radius: 50%;
+            border-color: red red #0000 #0000;
+            mix-blend-mode: darken;
+            animation: l14 1s infinite linear;
+        }
+
+        .loader::after {
+            border-color: #0000 #0000 blue blue;
+            animation-direction: reverse;
+        }
+
+        @keyframes l14 {
+            100% {
+                transform: rotate(1turn)
+            }
+        }
+
+        #con {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* display: none; */
+        }
+    </style>
+</head>
+
+<body onload="show()">
+    <div class="con" id="con">
+        <div class="loader"></div>
+    </div>
+    <div class="container">
+
+        <div class="navbar">
+            <a href="#" style="text-transform: uppercase;">CURRENT USER : <%= user %></a>
+            <a href="/admin">DASHBOARD</a>
+            <a href="/admin/createquestion">CREATE QUESTION</a>
+            <a href="/admin/createuser">CREATE USER</a>
+            <a href="/admin/logout">LOGOUT</a>
+        </div>
+
+        <div class="question">
+            <table>
+                <% questions.forEach((i)=>{ %>
+                    <tr>
+                        <td class="number"><%= questions.indexOf(i) + 1 %></td>
+                        <td class="que"><%= i.question %></td>
+                    </tr>
+                <% }) %>
+            </table>
+        </div>
+
+    </div>
+    <script>
+        function show(){
+            document.getElementById('con').style.display = "none"
+        }
+    </script>
+</body>
+
+</html>

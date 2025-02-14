@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVALUATING</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            scrollbar-width: none;
+            box-sizing: border-box;
+            outline: none;
+            font-family: Poppins;
+            text-wrap: wrap;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 60px;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+
+            a {
+                padding: 10px 30px;
+                text-decoration: none;
+                color: black;
+                font-weight: 700;
+            }
+
+            a:hover {
+                background-color: rebeccapurple;
+                transition: .15s ease-in-out;
+                color: white;
+            }
+        }
+
+        .evaluate {
+            width: 100%;
+            height: calc(100% - 60px);
+            padding: 40px 5%;
+            overflow-y: scroll;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        ol {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            list-style-type: upper-roman;
+        }
+
+        li {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        /* HTML: <div class="loader"></div> */
+        .loader {
+            width: 100px;
+            aspect-ratio: 1;
+            display: grid;
+            animation: l14 4s infinite;
+        }
+
+        .loader::before,
+        .loader::after {
+            content: "";
+            grid-area: 1/1;
+            border: 8px solid;
+            border-radius: 50%;
+            border-color: red red #0000 #0000;
+            mix-blend-mode: darken;
+            animation: l14 1s infinite linear;
+        }
+
+        .loader::after {
+            border-color: #0000 #0000 blue blue;
+            animation-direction: reverse;
+        }
+
+        @keyframes l14 {
+            100% {
+                transform: rotate(1turn)
+            }
+        }
+
+        #con {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .inputs {
+            width: max-content;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            width: max-content;
+            padding: 15px 40px;
+            border: none;
+            background-color: black;
+            color: white;
+        }
+
+        button:hover {
+            background-color: green;
+            transition: .15s ease-in-out;
+        }
+        .fixed{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body onload="show()" onsubmit="exit()">
+    <div class="con" id="con">
+        <div class="loader"></div>
+    </div>
+    <div class="container">
+
+        <div class="navbar">
+            <a href="#" style="text-transform: uppercase;">CURRENT USER : <%= user %></a>
+            <a href="" style="text-transform: uppercase;">ANSWER SHEET OF : <%= finder.username %></a>
+            <a href="/admin/evaluate">SELECT STUDENT</a>
+            <a href="/admin/logout">LOGOUT</a>
+        </div>
+
+        <div class="evaluate">
+            <ol>
+                <% questions.forEach((i)=>{ %>
+                    <div class="box">
+                        <li>
+                            <%= i.question %>
+                        </li>
+                        <p style="font-style: normal; color: green;">ans : <%= finder.exam[0][i.id] %>
+                        </p>
+                    </div>
+                    <% }) %>
+            </ol>
+            <form action="/admin/result/<%= finder.id %>" class="form" method="post">
+                <div class="fixed">
+                    <div class="inputs">
+                        <input type="radio" id="passed" name="result" value="passed" required>
+                        <label for="passed">PASSED</label>
+                        <input type="radio" id="failed" name="result" value="failed" required>
+                        <label for="failed">FAILED</label>
+                    </div>
+                    <button>ADD RESULT</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script>
+        function show() {
+            document.getElementById('con').style.display = "none"
+        }
+
+        function exit(){
+            document.getElementById('con').style.display = "flex"
+        }
+    </script>
+</body>
+
+</html>
