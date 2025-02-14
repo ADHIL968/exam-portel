@@ -22,7 +22,7 @@
             height: 100vh;
         }
 
-        .navbar{
+        .navbar {
             width: 100%;
             height: 60px;
             background-color: lightblue;
@@ -31,41 +31,41 @@
             justify-content: space-between;
             padding: 0 5%;
 
-            a{
+            a {
                 padding: 10px 30px;
                 text-decoration: none;
                 color: black;
                 font-weight: 700;
             }
 
-            a:hover{
+            a:hover {
                 background-color: rebeccapurple;
                 transition: .15s ease-in-out;
                 color: white;
             }
         }
 
-        .question{
+        .question {
             width: 100%;
             height: calc(100% - 60px);
         }
-        .form{
+
+        .form {
             width: 100%;
             height: 100%;
-
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             gap: 15px;
 
-            input, 
-            button{
+            input,
+            button {
                 padding: 10px 40px;
                 width: 30%;
             }
 
-            button{
+            button {
                 background-color: black;
                 color: white;
                 border: none;
@@ -73,6 +73,7 @@
             }
 
         }
+
         /* HTML: <div class="loader"></div> */
         .loader {
             width: 100px;
@@ -114,6 +115,51 @@
             justify-content: center;
             /* display: none; */
         }
+
+        @media all and (max-width: 576px) {
+            .navbar {
+                width: 100%;
+                height: 60px;
+                background-color: lightblue;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 10px;
+
+                a {
+                    padding: 10px 30px;
+                    text-decoration: none;
+                    color: black;
+                    font-weight: 700;
+                    font-size: 10px;
+                }
+            }
+
+            .form {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 15px;
+
+                input,
+                button {
+                    padding: 10px 40px;
+                    width: 80%;
+                }
+
+                button {
+                    background-color: black;
+                    color: white;
+                    border: none;
+                    outline: none;
+                }
+
+            }
+
+        }
     </style>
 </head>
 
@@ -124,10 +170,8 @@
     <div class="container">
 
         <div class="navbar">
-            <a href="#" style="text-transform: uppercase;">CURRENT USER : <%= user %></a>
             <a href="/admin">DASHBOARD</a>
             <a href="/admin/viewquestions">VIEW QUESTIONS</a>
-            <a href="/admin/createuser">CREATE USER</a>
             <a href="/admin/logout">LOGOUT</a>
         </div>
 
@@ -141,7 +185,7 @@
     </div>
 
     <script>
-        function show(){
+        function show() {
             document.getElementById('con').style.display = "none"
         }
     </script>
